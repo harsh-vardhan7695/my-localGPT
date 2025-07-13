@@ -1,4 +1,4 @@
-# LocalGPT for Mac M4 🤖
+# my-LocalGPT for Mac
 
 A private, offline document chat system optimized for Mac Mini M4. Chat with your documents using AI without your data ever leaving your computer.
 
@@ -385,18 +385,15 @@ python ingest.py --device_type mps
 
 ## 📄 License
 
-This project is based on the original LocalGPT and includes optimizations for Mac M4. Please see LICENSE file for details.
+This project idea was taken from PrivateGPT. Please see LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
-- Original LocalGPT project by PromtEngineer
+- PrivateGPT
 - LangChain for the RAG framework
 - Hugging Face for model hosting
 - Meta for LLaMA models
-- Apple for Metal Performance Shaders
 
 ---
-
-**Made with ❤️ for Mac M4 users**
 
 For issues or questions, please open a GitHub issue or reach out to the community!
