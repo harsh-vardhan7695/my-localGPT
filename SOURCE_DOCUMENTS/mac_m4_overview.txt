@@ -1,0 +1,22 @@
+Mac Mini M4 Overview
+
+The Mac mini M4 is Apple's latest compact desktop computer featuring the M4 chip.
+
+Key Features:
+- M4 chip with 8-core CPU and 10-core GPU
+- Available with 16GB, 24GB, or 32GB unified memory
+- 256GB, 512GB, 1TB, or 2TB SSD storage options
+- Compact 7.7-inch square design
+- Multiple ports including Thunderbolt 4, USB-A, HDMI, and Ethernet
+
+The M4 chip provides excellent performance for AI workloads and machine learning tasks,
+making it ideal for running large language models locally.
+
+Performance Benefits:
+- Metal Performance Shaders acceleration
+- Unified memory architecture
+- Low power consumption
+- Excellent thermal management
+
+The Mac mini M4 is perfect for developers, content creators, and anyone needing
+a powerful yet compact desktop computer.
