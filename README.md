@@ -22,12 +22,6 @@ A private, offline document chat system optimized for Mac Mini M4. Chat with you
 - **Mac Mini M4** with 16GB RAM (recommended)
 - **macOS 12.6** or later
 - **Python 3.10** or later
-- **256GB SSD** (minimum for models and documents)
-
-### Recommended Configuration
-- Mac Mini M4 with 24GB+ RAM for better performance
-- Fast SSD for model loading
-- Stable internet connection for initial model downloads
 
 ## 🚀 Quick Start Guide
 
@@ -150,7 +144,7 @@ python run_localGPT.py --device_type mps
 ## 🎛️ Configuration Options
 
 ### Device Types
-- `mps` - Use Metal Performance Shaders (Mac M4 recommended)
+- `mps` - Use Metal Performance Shaders (Mac M4/M3 recommended)
 - `cpu` - CPU-only processing (slower but compatible)
 - `cuda` - NVIDIA GPU (not applicable for Mac M4)
 
@@ -250,14 +244,6 @@ cd models
 | LLaMA 2 7B (Q4) | ~6GB | 15-20 | Very Good |
 | Mistral 7B | ~12GB | 10-15 | Good |
 
-### Processing Times
-
-| Task | Time (16GB) | Time (24GB+) |
-|------|-------------|--------------|
-| Document ingestion (100 pages) | 2-5 min | 1-3 min |
-| First model load | 3-8 min | 2-5 min |
-| Subsequent queries | 5-15 sec | 3-10 sec |
-
 ## 🤝 Usage Examples
 
 ### Command Line
@@ -347,7 +333,6 @@ def ask_question():
 2. **Mixtral 8x7B** - Advanced reasoning (if available)
 3. **CodeLlama 13B** - For code-heavy documents
 
-## 🆘 Support
 
 ### Getting Help
 
@@ -355,15 +340,6 @@ def ask_question():
 2. **System info**: Run system compatibility check
 3. **Issues**: Check existing GitHub issues
 4. **Discord/Forum**: Join community discussions
-
-### Reporting Issues
-
-When reporting issues, include:
-- Mac M4 model and RAM amount
-- macOS version
-- Python version
-- Full error message
-- Steps to reproduce
 
 ## 🔄 Updates and Maintenance
 
@@ -396,4 +372,4 @@ This project idea was taken from PrivateGPT. Please see LICENSE file for details
 
 ---
 
-For issues or questions, please open a GitHub issue or reach out to the community!
+For issues or questions, please open a GitHub issue.
