@@ -1,6 +1,33 @@
 import logging
 import os
+
+# Configure logging to suppress PostHog errors before any imports
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)s - %(message)s", 
+    level=logging.INFO
+)
+
+# Set PostHog logger to CRITICAL level to suppress all errors
+logging.getLogger("posthog").setLevel(logging.CRITICAL)
+
+# Custom filter to suppress specific PostHog error messages
+class PostHogFilter(logging.Filter):
+    def filter(self, record):
+        return not (record.name == "posthog" and "Failed to send telemetry event" in record.getMessage())
+
+# Apply filter to root logger
+logging.getLogger().addFilter(PostHogFilter())
+
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+
+# Disable telemetry to prevent PostHog errors
+os.environ["CHROMA_TELEMETRY"] = "false"
+os.environ["ANONYMIZED_TELEMETRY"] = "false"
+os.environ["POSTHOG_DISABLED"] = "true"
+
+# Suppress PostHog telemetry warnings
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="posthog")
 
 import click
 import torch
@@ -61,8 +88,16 @@ def load_document_batch(filepaths):
 def load_documents(source_dir: str) -> list[Document]:
     # Loads all documents from the source documents directory, including nested folders
     paths = []
+    # Files to ignore during document processing
+    ignore_files = {'.gitkeep', '.gitignore', '.DS_Store', 'Thumbs.db'}
+    
     for root, _, files in os.walk(source_dir):
         for file_name in files:
+            # Skip files that should be ignored
+            if file_name in ignore_files:
+                print(f"Skipping: {file_name}")
+                continue
+                
             print("Importing: " + file_name)
             file_extension = os.path.splitext(file_name)[1]
             source_file_path = os.path.join(root, file_name)
@@ -92,7 +127,9 @@ def load_documents(source_dir: str) -> list[Document]:
             # open the file and load the data
             try:
                 contents, _ = future.result()
-                docs.extend(contents)
+                # Filter out None values before extending docs
+                valid_contents = [doc for doc in contents if doc is not None]
+                docs.extend(valid_contents)
             except Exception as ex:
                 file_log("Exception: %s" % (ex))
 
@@ -153,6 +190,11 @@ def main(device_type:str):
     texts.extend(python_splitter.split_documents(python_documents))
     logging.info(f"Loaded {len(documents)} documents from {SOURCE_DIRECTORY}")
     logging.info(f"Split into {len(texts)} chunks of text")
+    
+    # Check if we have any valid documents to process
+    if len(texts) == 0:
+        logging.error("No valid documents found to create embeddings. Please check your source documents.")
+        return
 
     """
     (1) Chooses an appropriate langchain library based on the enbedding model name.  Matching code is contained within fun_localGPT.py.
@@ -174,9 +216,6 @@ def main(device_type:str):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)s - %(message)s", level=logging.INFO
-    )
     main()
 
 
