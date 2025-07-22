@@ -1,6 +1,6 @@
 # my-LocalGPT for Mac
 
-A private, offline document chat system optimized for Mac Mini M4. Chat with your documents using AI without your data ever leaving your computer.
+A private, offline document chat system optimized for Mac. Chat with your documents using AI without your data ever leaving your computer.
 
 ![LocalGPT Interface](https://img.shields.io/badge/Mac%20M4-Optimized-blue)
 ![Privacy](https://img.shields.io/badge/Privacy-100%25%20Local-green)
@@ -8,8 +8,8 @@ A private, offline document chat system optimized for Mac Mini M4. Chat with you
 
 ## ✨ Features
 
-- 🔒 **100% Private**: All processing happens locally on your Mac M4
-- 🚀 **Mac M4 Optimized**: Leverages Metal Performance Shaders for fast inference
+- 🔒 **100% Private**: All processing happens locally on your Mac
+- 🚀 **Mac Optimized**: Leverages Metal Performance Shaders for fast inference
 - 📄 **Multiple Formats**: Support for PDF, TXT, DOCX, XLSX, CSV, Markdown
 - 🤖 **Powerful AI**: Uses LLaMA 3 and other state-of-the-art models
 - 💬 **Chat Interface**: Modern web-based chat with Streamlit
@@ -19,7 +19,7 @@ A private, offline document chat system optimized for Mac Mini M4. Chat with you
 ## 🖥️ System Requirements
 
 ### Minimum Requirements
-- **Mac Mini M4** with 16GB RAM (recommended)
+- **Mac** with 16GB RAM (recommended)
 - **macOS 12.6** or later
 - **Python 3.10** or later
 
@@ -57,7 +57,7 @@ CMAKE_ARGS="-DLLAMA_METAL=on" pip install --force-reinstall --no-cache-dir llama
 python -c "from utils import check_system_compatibility; print(check_system_compatibility())"
 ```
 
-You should see output showing your Mac M4 capabilities, including MPS availability.
+You should see output showing your Mac capabilities, including MPS availability.
 
 ### Step 4: Choose Your Interface
 
@@ -82,7 +82,7 @@ python run_localGPT.py --device_type mps
 
 ### 1. Environment Setup
 
-For best performance on Mac M4, ensure you're using the native Python installation:
+For best performance on Mac, ensure you're using the native Python installation:
 
 ```bash
 # Check if you're using native Python
@@ -232,11 +232,11 @@ cd models
 2. **Close other applications** while running
 3. **Use quantized models** for better performance
 4. **Process documents gradually** rather than all at once
-5. **Monitor temperature** - Mac M4 may throttle under heavy load
+5. **Monitor temperature** - Mac may throttle under heavy load
 
 ## 📊 Performance Benchmarks
 
-### Mac Mini M4 (16GB RAM)
+### Mac(16GB RAM)
 
 | Model | RAM Usage | Tokens/sec | Quality |
 |-------|-----------|------------|---------|
@@ -288,38 +288,6 @@ print(response['result'])
 | CSV | `.csv` | Comma-separated values |
 | Markdown | `.md` | Markdown formatted text |
 
-## 🎯 Advanced Usage
-
-### Custom Embeddings
-```python
-# In constants.py, change embedding model
-EMBEDDING_MODEL_NAME = "intfloat/e5-large-v2"  # Faster alternative
-```
-
-### Batch Processing
-```bash
-# Process multiple document folders
-for folder in ~/Documents/*/; do
-    cp "$folder"*.pdf SOURCE_DOCUMENTS/
-    python ingest.py --device_type mps
-done
-```
-
-### API Integration
-```python
-# Create a simple API wrapper
-from flask import Flask, request, jsonify
-from run_localGPT import retrieval_qa_pipline
-
-app = Flask(__name__)
-qa = retrieval_qa_pipline(device_type="mps")
-
-@app.route('/ask', methods=['POST'])
-def ask_question():
-    question = request.json.get('question')
-    response = qa(question)
-    return jsonify({'answer': response['result']})
-```
 
 ## 🤖 Model Recommendations
 
