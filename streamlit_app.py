@@ -8,7 +8,7 @@ import shutil
 
 # Set up the page config
 st.set_page_config(
-    page_title="LocalGPT - Private Document Chat",
+    page_title="MyLocalGPT - Private Document Chat",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -205,7 +205,7 @@ def chat_interface():
 def sidebar():
     """Create sidebar with controls and information."""
     with st.sidebar:
-        st.title("🤖 LocalGPT")
+        st.title("🤖 MyLocalGPT")
         st.markdown("---")
         
         # Display system info
@@ -244,12 +244,11 @@ def sidebar():
         # Information
         st.header("ℹ️ About")
         st.markdown("""
-        **LocalGPT** allows you to chat with your documents privately. 
-        Everything runs locally on your Mac M4 - no data leaves your computer!
+        **MyLocalGPT** allows you to chat with your documents privately. 
+        Everything runs locally on your Mac- no data leaves your computer!
         
         **Features:**
         - 🔒 100% Private
-        - 🚀 Mac M4 Optimized  
         - 📄 Multiple file formats
         - 🤖 Powered by LLaMA
         """)
@@ -262,7 +261,7 @@ def main():
     sidebar()
     
     # Main content
-    st.title("🤖 LocalGPT - Private Document Chat")
+    st.title("🤖 MyLocalGPT - Private Document Chat")
     st.markdown("Chat with your documents privately using AI. Optimized for Mac M4.")
     
     # Create tabs
